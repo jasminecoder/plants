@@ -1,0 +1,53 @@
+<p style="color: green"><%= notice %></p>
+<h1>Plants</h1>
+
+
+<div id="plants">
+
+  <table class="table table-striped table-bordered">
+
+<thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Color</th>
+      <th scope="col">Qty</th>
+      <th scope="col">Exposure</th>
+      <th scope="col">Fertilizing</th>
+      <th scope="col">Water how often (days)</th>
+
+      <th scope="col">Blooms</th>
+      <th scope="col">Height</th>
+      <th scope="col">Width</th>
+      <th scope="col">Spacing</th>
+      <th scope="col">Hardiness(F)</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+  <% @plants.each_with_index do |plant, i| %>
+
+    <tr>
+      <th scope="row"><%= i+1 %></th>
+      <td><%= link_to plant.name, plant %></td>
+      <td><%= plant.color %></td>
+      <td class="text-center"><%= plant.quantity %></td>
+      <td><%= plant.exposure %></td>
+      <td><%= plant.fertilizing %></td>
+      <td><%= plant.water_frequency %></td>
+
+      <td><%= plant.blooms %></td>
+      <td class="text-center"><%= plant.height %></td>
+      <td class="text-center"><%= plant.width %></td>
+      <td><%= plant.spacing %></td>
+      <td><%= plant.hardiness %></td>
+
+    </tr>
+  <% end %>
+
+  </tbody>
+</table>
+    
+</div>
+
+<%= link_to "New plant", new_plant_path %>

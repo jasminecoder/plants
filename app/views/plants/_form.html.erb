@@ -1,0 +1,81 @@
+<%= simple_form_for @plant do |f| %>
+  <% if plant.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(plant.errors.count, "error") %> prohibited this plant from being saved:</h2>
+
+      <ul>
+        <% plant.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%=f.label :main_image, class:"form-label mb-1 small d-block"%>  
+    <%= f.file_field :main_image, accept: 'image/png, image/gif, image/jpeg', class:"form-control", label_html: { class: 'small' }  %>
+  </div>
+  <div class="mb-3">
+    <%= f.input :name, class:"form-control", placeholder:"Name", label_html: { class: 'small' }  %>
+  </div>
+  <div class="mb-3">
+    <%= f.input :quantity, class:"form-control", placeholder:"Quantity", label_html: { class: 'small' } %>
+  </div>
+  <div class="mb-3">
+    <%= f.input :color, class:"form-control", placeholder:"Colors",label_html: { class: 'small' }  %>
+  </div>
+  <div class="mb-3">
+    <%=f.label :exposure, class:"form-label mb-1 small d-block"%>  
+    <%= f.collection_check_boxes(:exposure, exposures, :first, :last, include_hidden: false) do |b| %>
+    <%= b.label class:"form-check-inline mr-5" do%>
+         <%=b.check_box %> 
+         <span class="form-check-label">
+          <%= b.text%>
+         </span>
+        <%end%>
+  <%
+=begin%>
+ <%= b.label(class:"form-check-inline border") { b.check_box + b.text } %> 
+<%
+=end%>
+    <% end %>
+  </div>
+  <div class="mb-3">
+    <%=f.label :fertilizing, class:"form-label mb-1 small"%>
+    <%= f.input_field :fertilizing, class:"form-control", placeholder:"Fertilizing frequency" %>
+  </div>
+  <div class="mb-3">
+    <%=f.label :water_frequency, class:"form-label mb-1 small"%>
+    <%= f.input_field :water_frequency, class:"form-control", placeholder:"Water frequency" %>
+  </div>
+  <div class="mb-3">
+    <%=f.label :blooms, class:"form-label mb-1 small"%>
+    <%= f.input_field :blooms, class:"form-control", placeholder:"Blooms" %>
+  </div>
+  <div class="mb-3">
+    <%=f.label :height, class:"form-label mb-1 small"%>
+    <%= f.input_field :height, class:"form-control", placeholder:"Height" %>
+  </div>
+  <div class="mb-3">
+    <%=f.label :width, class:"form-label mb-1 small"%>
+    <%= f.input_field :width, class:"form-control", placeholder:"Width" %>
+  </div>
+  <div class="mb-3">
+    <%=f.label :spacing, class:"form-label mb-1 small"%>
+    <%= f.input_field :spacing, class:"form-control", placeholder:"Spacing" %>
+  </div>
+  <div class="mb-3">
+    <%=f.label :hardiness, class:"form-label mb-1 small"%>
+    <%= f.input_field :hardiness, class:"form-control", placeholder:"Hardiness" %>
+  </div>
+  <div class="mb-3">
+    <%=f.label :notes, class:"form-label mb-1 small"%>
+    <%= f.text_area :notes, size: "70x5", class:"form-control", placeholder:"Notes" %>
+  </div>
+
+
+
+  <div>
+    <%= f.submit(@plant.new_record? ? 'Create New Plant' : 'Update', class:"btn btn-success") %>
+  </div>
+<% end %>
